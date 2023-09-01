@@ -75,7 +75,7 @@ class _GalleryPermissionViewState extends State<GalleryPermissionView>
 
           // Description
           Text(
-            '''Allow Drishya picker to access your ${widget.isCamera ? 'camera and microphone' : 'album for picking media'} .''',
+            '''Allow App  to access your ${widget.isCamera ? 'camera and microphone' : 'album for picking media'} .''',
             textAlign: TextAlign.center,
           ),
 
@@ -91,7 +91,7 @@ class _GalleryPermissionViewState extends State<GalleryPermissionView>
                   child: OutlinedButton(
                     onPressed: Navigator.of(context).pop,
                     style: OutlinedButton.styleFrom(
-                      primary: scheme.secondary,
+                      foregroundColor: scheme.secondary,
                       visualDensity: VisualDensity.comfortable,
                     ),
                     child: const Text('Deny Access'),
@@ -103,9 +103,9 @@ class _GalleryPermissionViewState extends State<GalleryPermissionView>
                   _setting = true;
                 },
                 style: OutlinedButton.styleFrom(
+                  foregroundColor: scheme.onPrimary,
                   visualDensity: VisualDensity.comfortable,
                   backgroundColor: scheme.primary,
-                  primary: scheme.onPrimary,
                 ),
                 child: const Text('Allow Access'),
               ),

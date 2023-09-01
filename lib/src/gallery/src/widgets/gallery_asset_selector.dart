@@ -187,7 +187,7 @@ class GalleryAssetSelectorState extends State<GalleryAssetSelector>
                         animation: _selectSize,
                         builder: (context, child) {
                           return SizedBox(
-                            width: !canEdit
+                            width: true || !canEdit
                                 ? size.width
                                 : buttonWidth +
                                     _selectSize.value * (buttonWidth + 20.0),
@@ -240,7 +240,7 @@ class _TextButton extends StatelessWidget {
       ),
       child: Text(
         label ?? '',
-        style: Theme.of(context).textTheme.button!.copyWith(
+        style: Theme.of(context).textTheme.labelLarge!.copyWith(
               color: labelColor ?? Theme.of(context).colorScheme.onPrimary,
             ),
       ),

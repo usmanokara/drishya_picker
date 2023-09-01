@@ -49,5 +49,9 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Can I use the mic please?</string>
 
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

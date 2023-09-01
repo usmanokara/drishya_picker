@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:drishya_picker/drishya_picker.dart';
@@ -26,10 +25,14 @@ class EntityThumbnail extends StatelessWidget {
 
     //
     if (entity.type == AssetType.image || entity.type == AssetType.video) {
+      /*   if (entity.type == AssetType.image) {
+        print(entity.pickedFile?.path ?? '');
+        child = Image.file(File(entity.file ?? ''));
+      } else */
       if (entity.pickedThumbData != null) {
         child = Image.memory(
           entity.pickedThumbData!,
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         );
       } else {
         child = Image(
@@ -64,7 +67,7 @@ class EntityThumbnail extends StatelessWidget {
     }
 
     return AspectRatio(
-      aspectRatio: 1,
+      aspectRatio: 1 / 2,
       child: child,
     );
   }
@@ -101,7 +104,10 @@ class _MediaThumbnailProvider extends ImageProvider<_MediaThumbnailProvider> {
     DecoderCallback decode,
   ) async {
     assert(key == this, 'Checks _MediaThumbnailProvider');
-    final bytes = await entity.thumbnailData;
+    final bytes =
+        await entity.thumbnailDataWithSize(const ThumbnailSize(250, 250));
+
+    // final bytes = await entity.thumbnailData;
     onBytesLoaded?.call(bytes);
     return decode(bytes!);
   }

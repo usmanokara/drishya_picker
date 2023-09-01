@@ -36,7 +36,6 @@ class GalleryView extends StatefulWidget {
   /// Pick media
   static Future<List<DrishyaEntity>?> pick(
     BuildContext context, {
-
     /// Gallery controller
     GalleryController? controller,
 

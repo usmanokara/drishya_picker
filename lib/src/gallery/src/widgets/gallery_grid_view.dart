@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:drishya_picker/drishya_picker.dart';
@@ -140,7 +141,7 @@ class GalleryGridView extends StatelessWidget {
 }
 
 ///
-class _MediaTile extends StatelessWidget {
+class _MediaTile extends StatefulWidget {
   ///
   const _MediaTile({
     Key? key,
@@ -155,28 +156,64 @@ class _MediaTile extends StatelessWidget {
   final AssetEntity entity;
 
   @override
+  State<_MediaTile> createState() => _MediaTileState();
+}
+
+class _MediaTileState extends State<_MediaTile> {
+  File? file;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      loadFIle();
+    });
+  }
+
+  void loadFIle() {
+    if (widget.entity.type == AssetType.image) {
+      widget.entity.file.then((value) {
+        if (mounted) {
+          setState(() {
+            file = value;
+          });
+        }
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     Uint8List? bytes;
 
-    final drishya = entity.toDrishya;
+    final drishya = widget.entity.toDrishya;
 
     return ColoredBox(
       color: Colors.grey.shade800,
       child: InkWell(
         onTap: () {
           final entity = drishya.copyWith(pickedThumbData: bytes);
-          controller.select(context, entity);
+          widget.controller.select(context, entity);
         },
         child: Stack(
           fit: StackFit.expand,
           children: [
-            EntityThumbnail(
-              entity: drishya,
-              onBytesGenerated: (b) {
-                bytes = b;
-              },
+            if (file != null && widget.entity.type == AssetType.image)
+              Image.file(
+                file!,
+                fit: BoxFit.cover,
+              ),
+            if (widget.entity.type == AssetType.video)
+              EntityThumbnail(
+                entity: drishya,
+                onBytesGenerated: (b) {
+                  bytes = b;
+                },
+              ),
+            _SelectionCount(
+              controller: widget.controller,
+              entity: widget.entity,
             ),
-            _SelectionCount(controller: controller, entity: entity),
           ],
         ),
       ),
@@ -217,7 +254,7 @@ class _SelectionCount extends StatelessWidget {
             radius: 14,
             child: Text(
               '${index + 1}',
-              style: Theme.of(context).textTheme.button?.copyWith(
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
             ),
