@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 /// Drishya editing controller
 class DrishyaEditingController extends ValueNotifier<EditorValue> {
@@ -159,7 +161,7 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
 
   ///
   /// Complete editing and generate image
-  Future<DrishyaEntity?> completeEditing({
+  Future<File?> completeEditing({
     ValueSetter<Exception>? onException,
   }) async {
     try {
@@ -168,15 +170,24 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
       if (bg is DrishyaBackground && !value.hasStickers) {
         // If background is drishya background and user has not edit the image
         // return its enity
-        return bg.entity;
+        // return bg.entity;
+        await bg.entity.file;
       } else if (bg is MemoryAssetBackground && !value.hasStickers) {
         // If background is memory bytes background and user has not edited the
         // image, create entity and return it
-        final entity = await PhotoManager.editor.saveImage(
+        /*     final entity = await PhotoManager.editor.saveImage(
           bg.bytes,
+          relativePath: appDir.path,
           title: const Uuid().v4(),
         );
         return entity?.toDrishya;
+
+ */
+        String tempPath = (await getTemporaryDirectory()).path;
+        File file = File('$tempPath/${Uuid().v4()}.png');
+        await file.writeAsBytes(bg.bytes);
+        // return entity?.toDrishya;
+        return file;
       } else {
         // If user has edited the background take screenshot
         // todo: remove screenshot approach, edit image properly
@@ -185,11 +196,15 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
         final image = await boundary!.toImage();
         final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
         final data = byteData!.buffer.asUint8List();
-        final entity = await PhotoManager.editor.saveImage(
+        /*   final entity = await PhotoManager.editor.saveImageWithPath(
           data,
           title: const Uuid().v4(),
-        );
-        return entity?.toDrishya;
+        ); */
+        String tempPath = (await getTemporaryDirectory()).path;
+        File file = File('$tempPath/${Uuid().v4()}.png');
+        await file.writeAsBytes(data);
+        // return entity?.toDrishya;
+        return file;
       }
     } catch (e) {
       onException?.call(

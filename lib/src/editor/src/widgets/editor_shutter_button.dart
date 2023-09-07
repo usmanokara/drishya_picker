@@ -4,6 +4,7 @@ import 'package:drishya_picker/src/animations/animations.dart';
 import 'package:drishya_picker/src/camera/src/widgets/ui_handler.dart';
 import 'package:drishya_picker/src/editor/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 ///
 class EditorShutterButton extends StatelessWidget {
@@ -18,7 +19,7 @@ class EditorShutterButton extends StatelessWidget {
   final DrishyaEditingController controller;
 
   ///
-  final ValueSetter<DrishyaEntity>? onSuccess;
+  final ValueSetter<File?>? onSuccess;
 
   @override
   Widget build(BuildContext context) {
