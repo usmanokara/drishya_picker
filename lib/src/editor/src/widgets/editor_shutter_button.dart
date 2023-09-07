@@ -46,6 +46,7 @@ class EditorShutterButton extends StatelessWidget {
                 final uiHandler = UIHandler.of(context);
 
                 final entity = await controller.completeEditing();
+                print(entity);
                 if (entity != null) {
                   UIHandler.transformFrom = TransitionFrom.topToBottom;
                   if (onSuccess != null) {

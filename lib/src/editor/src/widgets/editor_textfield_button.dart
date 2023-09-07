@@ -34,7 +34,7 @@ class EditorTextfieldButton extends StatelessWidget {
           controller.updateValue(hasFocus: true);
         },
         child: const Text(
-          'Tap to type...',
+          '',
           style: TextStyle(
             color: Colors.white60,
             fontSize: 30,

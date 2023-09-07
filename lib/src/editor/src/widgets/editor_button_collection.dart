@@ -132,12 +132,12 @@ class _EditorButtonCollectionState extends State<EditorButtonCollection> {
           ),
         ],
       ),
-      _EditingOption(
+      /* _EditingOption(
         id: 'sticker-picker',
         icon: Icons.emoji_emotions,
         onPressed: _onStickerIconPressed,
         disableOnpressed: true,
-      ),
+      ), */
     ];
   }
 
