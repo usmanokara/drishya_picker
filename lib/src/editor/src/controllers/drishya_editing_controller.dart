@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:drishya_picker/drishya_picker.dart';
@@ -6,9 +7,8 @@ import 'package:drishya_picker/src/editor/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
-import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:io';
+import 'package:uuid/uuid.dart';
 
 /// Drishya editing controller
 class DrishyaEditingController extends ValueNotifier<EditorValue> {
@@ -167,11 +167,12 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
     try {
       final bg = _backgroundNotifier.value;
 
-      if (bg is DrishyaBackground && !value.hasStickers) {
+      if (false && bg is DrishyaBackground && !value.hasStickers) {
         // If background is drishya background and user has not edit the image
         // return its enity
         // return bg.entity;
-        await bg.entity.file;
+        print('test=>if');
+        await bg.entity.originFile;
       } else if (bg is MemoryAssetBackground && !value.hasStickers) {
         // If background is memory bytes background and user has not edited the
         // image, create entity and return it
@@ -182,13 +183,16 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
         );
         return entity?.toDrishya;
 
+        print("test=>elseif");
  */
-        String tempPath = (await getTemporaryDirectory()).path;
-        File file = File('$tempPath/${Uuid().v4()}.png');
+        final String tempPath = (await getTemporaryDirectory()).path;
+        final file = File('$tempPath/${const Uuid().v4()}.png');
         await file.writeAsBytes(bg.bytes);
         // return entity?.toDrishya;
         return file;
       } else {
+        print('test=>else');
+
         // If user has edited the background take screenshot
         // todo: remove screenshot approach, edit image properly
         final boundary = _editorKey.currentContext?.findRenderObject()
@@ -200,8 +204,8 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
           data,
           title: const Uuid().v4(),
         ); */
-        String tempPath = (await getTemporaryDirectory()).path;
-        File file = File('$tempPath/${Uuid().v4()}.png');
+        final String tempPath = (await getTemporaryDirectory()).path;
+        final file = File('$tempPath/${const Uuid().v4()}.png');
         await file.writeAsBytes(data);
         // return entity?.toDrishya;
         return file;
