@@ -160,7 +160,7 @@ class _StickersViewState extends State<StickersView> {
                     child: Icon(
                       Icons.delete,
                       color: Colors.white,
-                      size: _collied ? 36.0 : 30.0,
+                      size: _collied ? 46.0 : 40.0,
                     ),
                   ),
                 ),
