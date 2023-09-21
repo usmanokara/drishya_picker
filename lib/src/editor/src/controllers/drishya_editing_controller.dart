@@ -197,7 +197,7 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
         // todo: remove screenshot approach, edit image properly
         final boundary = _editorKey.currentContext?.findRenderObject()
             as RenderRepaintBoundary?;
-        final image = await boundary!.toImage();
+        final image = await boundary!.toImage(pixelRatio: 10);
         final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
         final data = byteData!.buffer.asUint8List();
         /*   final entity = await PhotoManager.editor.saveImageWithPath(
