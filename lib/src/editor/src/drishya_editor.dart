@@ -55,7 +55,7 @@ class _DrishyaEditorState extends State<DrishyaEditor> {
   void initState() {
     super.initState();
     UIHandler.hideStatusBar();
-    _controller = (widget.controller ?? DrishyaEditingController())
+    _controller = (widget.controller ?? DrishyaEditingController(context))
       ..init(setting: widget.setting);
   }
 

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:drishya_picker/drishya_picker.dart';
+import 'package:drishya_picker/src/base_controller.dart';
 import 'package:drishya_picker/src/camera/src/widgets/ui_handler.dart';
 import 'package:drishya_picker/src/editor/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ import 'package:uuid/uuid.dart';
 class DrishyaEditingController extends ValueNotifier<EditorValue> {
   ///
   /// Drishya editing controller
-  DrishyaEditingController()
+  DrishyaEditingController([this.context])
       : _editorKey = GlobalKey(),
         _stickerController = StickerController(),
         _textController = TextEditingController(),
@@ -24,6 +25,8 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
         super(const EditorValue()) {
     init();
   }
+
+  BuildContext? context;
 
   ///
   late EditorSetting _setting;
@@ -195,6 +198,13 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
 
         // If user has edited the background take screenshot
         // todo: remove screenshot approach, edit image properly
+
+        final _baseController = BaseController(
+          _editorKey.currentContext,
+          () {},
+          'Processing image...',
+        );
+        _baseController.showProgress();
         final boundary = _editorKey.currentContext?.findRenderObject()
             as RenderRepaintBoundary?;
         final image = await boundary!.toImage(pixelRatio: 10);
@@ -207,6 +217,8 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
         final String tempPath = (await getTemporaryDirectory()).path;
         final file = File('$tempPath/${const Uuid().v4()}.png');
         await file.writeAsBytes(data);
+        _baseController.hideProgress();
+
         // return entity?.toDrishya;
         return file;
       }
