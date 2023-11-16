@@ -202,6 +202,7 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
         final _baseController = BaseController(
           _editorKey.currentContext,
           () {},
+          'Loading...',
         );
         _baseController.showProgress();
         final boundary = _editorKey.currentContext?.findRenderObject()
