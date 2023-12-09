@@ -14,7 +14,11 @@ dependencies:
   meta: ^1.7.0
   path: ^1.8.1
   # photo_manager: ^2.1.4
-  photo_manager: ^2.7.1
+  # photo_manager: ^2.7.1
+  # photo_manager: ^2.8.1
+  photo_manager: ^3.0.0-dev.1
+
+  
   uuid: ^3.0.6
 
 

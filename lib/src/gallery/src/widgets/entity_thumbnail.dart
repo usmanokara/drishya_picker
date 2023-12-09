@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:drishya_picker/drishya_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -86,10 +84,10 @@ class _MediaThumbnailProvider extends ImageProvider<_MediaThumbnailProvider> {
   final DrishyaEntity entity;
   final ValueSetter<Uint8List?>? onBytesLoaded;
 
-  @override
+  /*  @override
   ImageStreamCompleter load(
     _MediaThumbnailProvider key,
-    DecoderCallback decode,
+    // DecoderCallback decode,
   ) =>
       MultiFrameImageStreamCompleter(
         codec: _loadAsync(key, decode),
@@ -97,11 +95,10 @@ class _MediaThumbnailProvider extends ImageProvider<_MediaThumbnailProvider> {
         informationCollector: () sync* {
           yield ErrorDescription('Id: ${entity.id}');
         },
-      );
+      ); */
 
-  Future<ui.Codec> _loadAsync(
+  /*  Future<ui.Codec> _loadAsync(
     _MediaThumbnailProvider key,
-    DecoderCallback decode,
   ) async {
     assert(key == this, 'Checks _MediaThumbnailProvider');
     final bytes =
@@ -109,8 +106,9 @@ class _MediaThumbnailProvider extends ImageProvider<_MediaThumbnailProvider> {
 
     // final bytes = await entity.thumbnailData;
     onBytesLoaded?.call(bytes);
-    return decode(bytes!);
-  }
+    // return decode(bytes!);
+    return Object();
+  } */
 
   @override
   Future<_MediaThumbnailProvider> obtainKey(ImageConfiguration configuration) =>
