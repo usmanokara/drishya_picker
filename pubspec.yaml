@@ -1,5 +1,5 @@
 name: drishya_picker
-description: Assets picker which is inspired by messenger camera and gallery. 
+description: Assets picker which is inspired by messenger camera and gallery.
 version: 2.0.0-dev-1
 homepage: https://github.com/koiralapankaj7/drishya_picker
 
@@ -15,12 +15,12 @@ dependencies:
   path: ^1.8.1
   # photo_manager: ^2.1.4
   # photo_manager: ^2.7.1
-  # photo_manager: ^2.8.1
-  photo_manager: ^3.0.0-dev.1
+  photo_manager: ^2.8.1
+  # photo_manager: ^3.0.0-dev.1
 
-  
   uuid: ^3.0.6
-
+  video_thumbnail: ^0.5.3
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:

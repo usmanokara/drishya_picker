@@ -3,7 +3,7 @@ import 'package:drishya_picker/src/editor/src/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-const _top = 45.0;
+const _top = 60.0;
 
 ///
 class EditorOverlay extends StatelessWidget {

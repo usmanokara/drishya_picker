@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:drishya_picker/drishya_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 /// Widget to display [DrishyaEntity] thumbnail
 class EntityThumbnail extends StatelessWidget {
@@ -17,9 +21,22 @@ class EntityThumbnail extends StatelessWidget {
   /// Callback function triggered when image bytes is generated
   final ValueSetter<Uint8List?>? onBytesGenerated;
 
+  Future<File?> thmnnail(DrishyaEntity entity) async {
+    final file = await entity.file;
+    final uint8list = await VideoThumbnail.thumbnailFile(
+      video: file!.path,
+      thumbnailPath: (await getTemporaryDirectory()).path,
+      maxWidth:
+          200, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
+      quality: 50,
+    );
+    return File(uint8list!);
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget child = const SizedBox();
+    print('video preview');
 
     //
     if (entity.type == AssetType.image || entity.type == AssetType.video) {
@@ -28,17 +45,26 @@ class EntityThumbnail extends StatelessWidget {
         child = Image.file(File(entity.file ?? ''));
       } else */
       if (entity.pickedThumbData != null) {
+        print(
+          'video preview->entity.pickedThumbData != null ${entity.duration}',
+        );
         child = Image.memory(
           entity.pickedThumbData!,
           fit: BoxFit.fill,
         );
       } else {
-        child = Image(
-          image: _MediaThumbnailProvider(
-            entity: entity,
-            onBytesLoaded: onBytesGenerated,
-          ),
-          fit: BoxFit.cover,
+        print('video preview-> ese ${entity.duration}}');
+        child = FutureBuilder(
+          future: thmnnail(entity),
+          builder: (context, data) {
+            if (data.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return Image.file(
+              data.data! as File,
+              fit: BoxFit.cover,
+            );
+          },
         );
       }
     }

@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ///
-const _top = 30.0;
+const _top = 60.0;
 
 ///
 class CameraOverlay extends StatelessWidget {
