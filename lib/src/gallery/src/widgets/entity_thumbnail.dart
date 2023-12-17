@@ -23,14 +23,17 @@ class EntityThumbnail extends StatelessWidget {
 
   Future<File?> thmnnail(DrishyaEntity entity) async {
     final file = await entity.file;
+    if (file == null) return null;
+
     final uint8list = await VideoThumbnail.thumbnailFile(
-      video: file!.path,
+      video: file.path,
       thumbnailPath: (await getTemporaryDirectory()).path,
       maxWidth:
           200, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
       quality: 50,
     );
-    return File(uint8list!);
+    if (uint8list == null) return null;
+    return File(uint8list);
   }
 
   @override
@@ -60,6 +63,7 @@ class EntityThumbnail extends StatelessWidget {
             if (data.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
+            if (data.data == null) return const Icon(Icons.video_call);
             return Image.file(
               data.data! as File,
               fit: BoxFit.cover,
