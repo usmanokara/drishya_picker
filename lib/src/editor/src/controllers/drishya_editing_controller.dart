@@ -188,7 +188,7 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
 
         print("test=>elseif");
  */
-        final String tempPath = (await getTemporaryDirectory()).path;
+        final tempPath = (await getTemporaryDirectory()).path;
         final file = File('$tempPath/${const Uuid().v4()}.png');
         await file.writeAsBytes(bg.bytes);
         // return entity?.toDrishya;
@@ -202,7 +202,7 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
         final _baseController = BaseController(
           _editorKey.currentContext,
           () {},
-          'Loading...',
+          '',
         );
         _baseController.showProgress();
         final boundary = _editorKey.currentContext?.findRenderObject()
@@ -214,7 +214,7 @@ class DrishyaEditingController extends ValueNotifier<EditorValue> {
           data,
           title: const Uuid().v4(),
         ); */
-        final String tempPath = (await getTemporaryDirectory()).path;
+        final tempPath = (await getTemporaryDirectory()).path;
         final file = File('$tempPath/${const Uuid().v4()}.png');
         await file.writeAsBytes(data);
         _baseController.hideProgress();
