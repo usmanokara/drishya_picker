@@ -88,9 +88,13 @@ class _AppDialog extends StatelessWidget {
       onPressed: Navigator.of(context).pop,
       child: Text(
         'NO',
-        style: Theme.of(context).textTheme.button!.copyWith(
+        /* style: Theme.of(context).textTheme.button!.copyWith(
               color: Colors.lightBlue,
             ),
+         */
+        style: TextStyle(
+          color: Colors.lightBlue,
+        ),
       ),
     );
     final unselectItems = TextButton(
@@ -99,24 +103,35 @@ class _AppDialog extends StatelessWidget {
       },
       child: Text(
         'DISCARD',
-        style: Theme.of(context).textTheme.button!.copyWith(
-              color: Colors.blue,
-            ),
+        // style: Theme.of(context).textTheme.button!.copyWith(
+        //       color: Colors.blue,
+        //     ),
+        style: TextStyle(
+          color: Colors.blue,
+        ),
       ),
     );
 
     return AlertDialog(
       title: Text(
         'Discard changes?',
-        style: Theme.of(context).textTheme.headline6!.copyWith(
-              color: Colors.white70,
-            ),
+        // style: Theme.of(context).textTheme.headline6!.copyWith(
+        //       color: Colors.white70,
+        //     ),
+
+        style: TextStyle(
+          color: Colors.white70,
+        ),
       ),
       content: Text(
         'Are you sure you want to discard your changes?',
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+        /*   style: Theme.of(context).textTheme.bodyText2!.copyWith(
               color: Colors.grey.shade600,
             ),
+       */
+        style: TextStyle(
+          color: Colors.grey.shade600,
+        ),
       ),
       actions: [cancel, unselectItems],
       backgroundColor: Colors.grey.shade900,

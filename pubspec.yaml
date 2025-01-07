@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   camera: ^0.9.8+1
+  get: ^4.6.6
   collection: ^1.16.0
   flutter:
     sdk: flutter
@@ -15,8 +16,8 @@ dependencies:
   path: ^1.8.1
   # photo_manager: ^2.1.4
   # photo_manager: ^2.7.1
-  photo_manager: ^2.8.1
-  # photo_manager: ^3.0.0-dev.1
+  # photo_manager: ^2.8.1
+  photo_manager: ^3.5.0
 
   uuid: ^3.0.6
   video_thumbnail: ^0.5.3

@@ -35,15 +35,16 @@ class _RecentEntitiesState extends State<RecentEntities> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8),
           child: Text(
             'Recent',
-            style: Theme.of(context).textTheme.headline6,
+            //style: Theme.of(context).textTheme.headline6,
+            style: TextStyle(color: Colors.white),
           ),
         ),
         SizedBox(
-          height: 100.0,
+          height: 100,
           width: MediaQuery.of(context).size.width,
           child: FutureBuilder<List<DrishyaEntity?>>(
             future: _future,
@@ -55,7 +56,7 @@ class _RecentEntitiesState extends State<RecentEntities> {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.only(right: 4.0),
+                padding: const EdgeInsets.only(right: 4),
                 itemBuilder: (c, i) {
                   final entity = snapshot.data![i];
                   if (entity == null) return const SizedBox();
@@ -65,7 +66,7 @@ class _RecentEntitiesState extends State<RecentEntities> {
                       final selected = data.entities.contains(entity);
 
                       return Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
+                        padding: const EdgeInsets.only(left: 4),
                         child: InkWell(
                           onTap: () {
                             final entities =
@@ -81,8 +82,8 @@ class _RecentEntitiesState extends State<RecentEntities> {
                           child: Stack(
                             children: [
                               SizedBox(
-                                height: 100.0,
-                                width: 100.0,
+                                height: 100,
+                                width: 100,
                                 child: EntityThumbnail(entity: entity),
                               ),
                               if (selected)

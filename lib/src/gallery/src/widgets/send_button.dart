@@ -44,9 +44,13 @@ class SendButton extends StatelessWidget {
                       radius: 12,
                       child: Text(
                         '${value.selectedEntities.length}',
-                        style: Theme.of(context).textTheme.caption?.copyWith(
+                        /*  style: Theme.of(context).textTheme.caption?.copyWith(
                               color: Theme.of(context).colorScheme.onSecondary,
                             ),
+                        */
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
                       ),
                     ),
                   ),

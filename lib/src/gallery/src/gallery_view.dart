@@ -170,18 +170,18 @@ class _ViewState extends State<_View> with SingleTickerProviderStateMixin {
   void _showAlert() {
     final cancel = TextButton(
       onPressed: Navigator.of(context).pop,
-      child: Text(
+      child: const Text(
         'CANCEL',
-        style: Theme.of(context).textTheme.button!.copyWith(
-              color: Colors.lightBlue,
-            ),
+        style: TextStyle(
+          color: Colors.lightBlue,
+        ),
       ),
     );
     final unselectItems = TextButton(
       onPressed: _onSelectionClear,
       child: Text(
         'USELECT ITEMS',
-        style: Theme.of(context).textTheme.button!.copyWith(
+        style: Theme.of(context).textTheme.labelLarge!.copyWith(
               color: Colors.blue,
             ),
       ),
@@ -190,13 +190,13 @@ class _ViewState extends State<_View> with SingleTickerProviderStateMixin {
     final alertDialog = AlertDialog(
       title: Text(
         'Unselect these items?',
-        style: Theme.of(context).textTheme.headline6!.copyWith(
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Colors.white70,
             ),
       ),
       content: Text(
         'Going back will undo the selections you made.',
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Colors.grey.shade600,
             ),
       ),

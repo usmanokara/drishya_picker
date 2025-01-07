@@ -271,6 +271,7 @@ class CamController extends ValueNotifier<CamValue> {
       } else {
         final entity = await PhotoManager.editor.saveImage(
           bytes,
+          filename: path.basename(file.path),
           title: path.basename(file.path),
         );
 
